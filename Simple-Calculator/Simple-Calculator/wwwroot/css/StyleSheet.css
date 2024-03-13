@@ -1,0 +1,124 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Alkatra:wght@700&family=Coiny&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Narrow:ital,wght@0,400..700;1,400..700&display=swap');
+
+body {
+    background-color: rgba(233, 150, 122, 1);
+}
+
+#calculator {
+    width: 540px;
+    height: 650px;
+    margin: 0 auto;
+    margin-left: 400px;
+    position: absolute;
+    border: 4px solid #ffffff;
+    padding: 20px;
+    border-radius: 10px 10px 0 0;
+    background-color: rgba(30, 30, 30, 0.75);
+    display: grid;
+    grid-template: "s s s s" 1fr
+        "a a a o" 1fr
+        "n n n o" 1fr
+        "n n n o" 1fr
+        "n n n o" 1fr
+        "n n n o" 1fr
+        / 1fr 1fr 1fr 1fr;
+}
+
+p {
+    font-size: 40px;
+    color: black;
+    text-align: center;
+    margin-top: 25px;
+    font-family: "Coiny";
+}
+
+.screens {
+    width: 100%;
+    height: auto;
+    grid-area: s;
+    background-color: transparent;
+    border-radius: 10px 10px 0 0;
+}
+
+    .screens h3 {
+        color: white;
+        text-align: right;
+        font-family: 'Coiny';
+        width: 100%;
+        height: 100%;
+        font-size: 40px;
+        user-select: none;
+        padding: 10px; /* Add padding for better readability */
+        margin: 0; /* Remove default margin */
+    }
+
+.container {
+    justify-items: center;
+    grid-gap: 5px;
+    padding: 5px 0;
+}
+
+.aux {
+    grid-area: a;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Changed "ifr" to "1fr" */
+    padding-bottom: 0px;
+}
+
+.operators {
+    grid-area: o;
+    display: grid;
+    grid-template-rows: repeat(5, 1fr); /* Changed "ifr" to "1fr" */
+    padding-right: 5px;
+}
+
+.numbers {
+    grid-area: n;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Changed "ifr" to "1fr" */
+    grid-template-rows: repeat(4, 1fr); /* Changed "ifr" to "1fr" */
+}
+
+    .auxillary,
+    .numbers button {
+        background-color: rgba(217, 217, 217, 1);
+        color: black;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        font-family: 'Archivo Narrow';
+        font-size: 30px;
+        width: 95px;
+        height: 90px;
+        border-radius: 50%;
+    }
+
+        .auxillary:hover,
+        .operator:hover,
+        .numbers button:hover {
+            background-color: rgba(168, 168, 168, 1);
+            color: black;
+        }
+
+.operator {
+    background-color: rgba(147, 147, 147, 1);
+    color: black;
+    border: none;
+    font-family: 'Archivo Narrow';
+    outline: none;
+    cursor: pointer;
+    font-size: 30px;
+    width: 95px;
+    height: 90px;
+    border-radius: 50%;
+}
+
+#zero {
+    grid-column: span 2;
+    border-radius: 50px 50px;
+    width: 250px;
+    height: 80px;
+    margin-top: 6px;
+    text-align: center;
+}
