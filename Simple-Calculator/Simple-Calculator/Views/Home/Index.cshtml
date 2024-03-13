@@ -38,5 +38,74 @@
         </div>
     </div>
 
+    <script>
+        $(document).ready(function () {
+            var expression = ""; // Variable to store the expression
+            var result = null; // Variable to store the result
+
+            // Function to handle button click
+            function handleButtonClick(value) {
+                // If there is a result from the previous calculation, start a new expression
+                if (result !== null) {
+                    expression = value.toString();
+                    result = null; // Reset the result
+                } else {
+                    expression += value.toString(); // Append value to the expression
+                }
+                $("#display").text(expression); // Update the screen
+            }
+
+            // Handle number and operator button clicks
+            $(".numbers button, .operators button").click(function () {
+                var value = $(this).attr("value");
+                handleButtonClick(value);
+            });
+
+            // Handle auxiliary button clicks
+            $(".aux button, .auxillary button").click(function () {
+                var value = $(this).attr("value");
+                handleButtonClick(value);
+            });
+
+            // Handle = button click
+            $(".operators button[value='=']").click(function () {
+                // Remove the '=' operator from the expression before sending it to the server
+                var expressionToSend = expression.replace("=", "");
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Calculator/Calculate",
+                    data: { expression: expressionToSend },
+                    success: function (response) {
+                        // Update the screen with the result returned from the server
+                        $("#display").text(response.result);
+                        result = response.result; // Store the result for future calculations
+                        expression = response.result; // Update the expression with the result
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+            });
+
+            // Handle AC button click
+            $(".aux button[value='AC'], .auxillary button[value='AC']").click(function () {
+                expression = ""; // Clear the expression
+                result = null; // Reset the result
+                $("#display").text(""); // Clear the screen
+            });
+
+            // Handle keyboard input
+            $(document).keypress(function (e) {
+                var keyValue = String.fromCharCode(e.which);
+                if ($.isNumeric(keyValue) || "+-*/.=%".includes(keyValue)) {
+                    handleButtonClick(keyValue);
+                } else if (e.which === 8) { // Backspace key
+                    expression = expression.slice(0, -1); // Remove the last character from the expression
+                    $("#display").text(expression); // Update the screen
+                }
+            });
+        });
+    </script>
 </body>
 </html>
